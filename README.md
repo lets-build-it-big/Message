@@ -29,10 +29,3 @@ This lets email confirmation links return to the local app. When you host the ap
 ## Create your account
 
 Choose **Create an account**, enter your display name, username, email, and password, then confirm your email if Supabase asks you to. After confirming, return to Relay and sign in.
-
-## Notes
-
-- The Supabase schema and row-level security policies have already been applied to the linked project.
-- The app uses the public publishable key. It does not contain a service-role or secret key.
-- Keep Row Level Security enabled. Do not put a Supabase secret/service-role key in this HTML file.
-- Supabase Auth's leaked-password protection is currently disabled in the project; enable it in **Authentication → Password Security** for stronger password checks.
