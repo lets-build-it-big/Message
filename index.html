@@ -78,7 +78,7 @@
         if(authMode==='signup'){
           const username=$('username').value.trim().toLowerCase().replace(/[^a-z0-9_]/g,'').slice(0,24);
           if(username.length<3)throw new Error('Choose a username with at least 3 letters or numbers.');
-          const {data,error}=await supabase.auth.signUp({email,password,options:{data:{username,display_name:$('displayName').value.trim()||username},emailRedirectTo:window.location.origin}});if(error)throw error;
+          const {data,error}=await supabase.auth.signUp({email,password,options:{data:{username,display_name:$('displayName').value.trim()||username},emailRedirectTo:window.location.href.split('#')[0]}});if(error)throw error;
           if(!data.session){setAuthNotice('Account created. Check your email for the confirmation link, then return here and sign in.');return;}
           toast('Your Relay account is ready.');
         }else{
@@ -154,10 +154,8 @@
       if(error){toast('Could not load messages: '+error.message,true);return;}messageIds=new Set();$('messages').innerHTML='';(data||[]).forEach(renderMessage);scrollMessages();
       await supabase.from('relay_conversation_members').update({last_read_at:new Date().toISOString()}).eq('conversation_id',id).eq('user_id',currentUser.id);
       const myMembership=room.members.find(m=>m.user_id===currentUser.id);if(myMembership)myMembership.last_read_at=new Date().toISOString();room.lastReadAt=new Date().toISOString();renderConversationList();
-      if(activeChannel)await supabase.removeChannel(activeChannel);
-      activeChannel=supabase.channel('messages:'+id).on('postgres_changes',{event:'INSERT',schema:'public',table:'messages',filter:'conversation_id=eq.'+id},payload=>{
-        if(activeConversation?.id!==id)return;renderMessage(payload.new);scrollMessages();loadConversations();
-      }).subscribe();
+      // The account-wide inbox subscription listens to public.relay_messages and
+      // updates this open conversation too. No second table subscription is needed.
     }
 
     function renderMessage(message){if(!message||messageIds.has(message.id))return;messageIds.add(message.id);const mine=message.sender_id===currentUser.id;const sender=activeConversation?.members.find(m=>m.user_id===message.sender_id)?.profile;const row=document.createElement('div');row.className='message-row'+(mine?' mine':'');const bubbleWrap=document.createElement('div');bubbleWrap.className='bubble-wrap';if(!mine){const label=document.createElement('div');label.className='sender';label.textContent=sender?.display_name||sender?.username||'Member';bubbleWrap.appendChild(label)}const bubble=document.createElement('div');bubble.className='bubble';bubble.textContent=message.body;const time=document.createElement('div');time.className='message-time';time.textContent=timeLabel(message.created_at);bubbleWrap.append(bubble,time);row.appendChild(bubbleWrap);$('messages').appendChild(row)}
