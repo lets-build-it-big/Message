@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#101621" />
+  <title>Relay — Messaging</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{color-scheme:dark;--bg:#0c121b;--panel:#121b27;--panel2:#172332;--line:#253346;--muted:#8c9aae;--text:#eaf1f8;--accent:#5de0c1;--accent2:#56a8ff;--danger:#ff7d8a;--shadow:0 24px 80px #0007}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(1000px 600px at 12% -8%,#1c3948 0%,transparent 55%),radial-gradient(700px 500px at 100% 100%,#182b43 0%,transparent 55%),var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}button,input{font:inherit}button{cursor:pointer}.shell{max-width:1440px;margin:0 auto;padding:24px;min-height:100vh;display:flex;align-items:center}.app{width:100%;height:min(860px,calc(100vh - 48px));min-height:620px;border:1px solid #2a3a4f;border-radius:24px;overflow:hidden;background:#101925ed;box-shadow:var(--shadow);display:grid;grid-template-columns:310px minmax(0,1fr);backdrop-filter:blur(20px)}.sidebar{background:#111a26;border-right:1px solid var(--line);display:flex;flex-direction:column;min-width:0}.brandrow{display:flex;align-items:center;gap:12px;padding:25px 22px 19px}.logo{height:38px;width:38px;border-radius:13px;background:linear-gradient(145deg,#65e7c8,#4fa9ff);display:grid;place-items:center;color:#09202a;font-weight:800;font-family:'Space Grotesk';font-size:22px;box-shadow:0 8px 22px #4ccab344}.brand{font:700 21px 'Space Grotesk';letter-spacing:-.8px}.brand span{color:var(--accent)}.subbrand{font-size:11px;color:var(--muted);margin-top:2px}.side-actions{padding:0 16px 16px}.search{width:100%;height:42px;background:#0d1621;border:1px solid var(--line);border-radius:12px;padding:0 13px;color:var(--text);outline:none}.search:focus,input:focus{border-color:#54cdb6;box-shadow:0 0 0 3px #54cdb61b}.section-title{display:flex;justify-content:space-between;align-items:center;padding:15px 20px 9px;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#77879c;font-weight:700}.text-button{border:0;background:none;color:var(--accent);font-weight:700;font-size:12px}.chat-list{overflow:auto;padding:0 9px 12px}.chat-item{display:flex;gap:11px;align-items:center;padding:11px;border-radius:13px;cursor:pointer;transition:.15s;border:1px solid transparent}.chat-item:hover{background:#1a2938}.chat-item.active{background:#1b3040;border-color:#2b5660}.avatar{width:42px;height:42px;flex:0 0 42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,#345c71,#273c5a);color:#e3fbfa;font-weight:700;font-family:'Space Grotesk';position:relative;overflow:hidden}.avatar.me{background:linear-gradient(145deg,#2da98f,#427dc0)}.avatar.small{width:31px;height:31px;flex-basis:31px;border-radius:10px;font-size:11px}.chat-meta{min-width:0;flex:1}.chat-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.chat-name{font-weight:700;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.chat-time{font-size:10px;color:#8090a4;white-space:nowrap}.chat-preview{font-size:11px;color:#91a0b3;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.unread{width:7px;height:7px;border-radius:99px;background:var(--accent);margin-left:5px;flex:0 0 7px}.sidebar-bottom{margin-top:auto;border-top:1px solid var(--line);padding:15px;display:flex;align-items:center;gap:10px}.me-meta{min-width:0;flex:1}.me-name{font-size:12px;font-weight:700}.me-handle{font-size:10px;color:var(--muted);margin-top:2px}.icon-button{width:36px;height:36px;border-radius:11px;border:1px solid var(--line);background:#172333;color:#c3d1df;display:grid;place-items:center}.icon-button:hover{border-color:#4bbfae;color:var(--accent)}.main{display:flex;flex-direction:column;min-width:0;min-height:0;background:linear-gradient(145deg,#111b27,#0e1722)}.welcome{height:100%;display:grid;place-items:center;text-align:center;padding:32px}.welcome-inner{max-width:390px}.welcome-art{height:106px;width:106px;margin:0 auto 22px;border-radius:32px;background:linear-gradient(145deg,#1c4450,#233a5a);display:grid;place-items:center;font-size:44px;box-shadow:inset 0 0 0 1px #6be3d32b,0 20px 50px #0004}.welcome h1{font:700 30px 'Space Grotesk';letter-spacing:-1.2px;margin:0 0 10px}.welcome p{color:var(--muted);font-size:14px;line-height:1.7;margin:0 auto 24px}.primary{border:0;border-radius:12px;padding:12px 17px;background:linear-gradient(110deg,#5de0c1,#6cb5ff);color:#08212a;font-weight:800;box-shadow:0 8px 24px #4bbfae24}.primary:hover{filter:brightness(1.07);transform:translateY(-1px)}.secondary{border:1px solid var(--line);background:#1a2838;color:var(--text);border-radius:11px;padding:10px 14px;font-weight:700}.chat-header{height:78px;display:flex;align-items:center;gap:13px;padding:0 24px;border-bottom:1px solid var(--line);background:#121d2a}.chat-title{font-weight:700;font-size:15px}.chat-status{font-size:11px;color:var(--muted);margin-top:4px}.header-spacer{flex:1}.messages{padding:22px 26px;overflow:auto;flex:1;display:flex;flex-direction:column;gap:13px}.day-divider{display:flex;align-items:center;gap:14px;color:#7e8da0;font-size:10px;margin:5px 0 10px}.day-divider:before,.day-divider:after{content:'';height:1px;flex:1;background:var(--line)}.message-row{display:flex;gap:9px;max-width:min(76%,620px);align-items:flex-end}.message-row.mine{align-self:flex-end;flex-direction:row-reverse}.bubble-wrap{min-width:0}.sender{font-size:10px;color:#8e9eb1;margin:0 0 5px 4px}.bubble{padding:11px 14px;border-radius:16px 16px 16px 5px;background:#1c2b3b;border:1px solid #2b3d51;color:#e4edf6;font-size:13px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}.mine .bubble{background:linear-gradient(135deg,#1e706c,#285f80);border-color:#3e9c91;border-radius:16px 16px 5px 16px;color:#f3fffc}.message-time{font-size:9px;color:#8090a4;margin:5px 4px 0}.mine .message-time{text-align:right}.composer-wrap{padding:14px 22px 20px;border-top:1px solid var(--line);background:#121d2a}.composer{display:flex;align-items:flex-end;gap:10px;padding:8px 9px 8px 14px;background:#0c1622;border:1px solid #2b3b50;border-radius:16px}.composer textarea{resize:none;max-height:130px;min-height:26px;flex:1;outline:0;border:0;background:transparent;color:var(--text);padding:5px 0;line-height:1.5}.send{width:39px;height:39px;border:0;border-radius:12px;background:linear-gradient(145deg,#5de0c1,#69b3ff);color:#09232b;font-weight:900;font-size:17px}.hint{font-size:10px;color:#708197;margin:8px 4px 0}.empty-list{padding:16px;color:#7f8fa3;font-size:12px;text-align:center;line-height:1.6}.modal-backdrop{position:fixed;inset:0;background:#03080ec9;display:none;align-items:center;justify-content:center;padding:20px;z-index:20;backdrop-filter:blur(8px)}.modal-backdrop.show{display:flex}.modal{width:min(470px,100%);background:#141f2d;border:1px solid #34465d;border-radius:20px;padding:22px;box-shadow:var(--shadow);max-height:88vh;overflow:auto}.modal h2{font:700 20px 'Space Grotesk';margin:0 0 6px}.muted{font-size:12px;color:var(--muted);line-height:1.5}.modal input{width:100%;height:42px;margin-top:12px;background:#0c1622;border:1px solid var(--line);border-radius:11px;padding:0 12px;color:var(--text);outline:0}.person-list{margin:12px 0;max-height:260px;overflow:auto}.person{display:flex;align-items:center;gap:10px;padding:9px;border-radius:11px;cursor:pointer}.person:hover{background:#1b2b3b}.person label{flex:1;cursor:pointer;font-size:13px}.person small{display:block;color:var(--muted);font-size:10px;margin-top:2px}.person input{width:16px;height:16px;margin:0;accent-color:#5de0c1}.modal-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:18px}.auth-backdrop{position:fixed;inset:0;background:#09111c;display:none;align-items:center;justify-content:center;padding:22px;z-index:30}.auth-backdrop.show{display:flex}.auth-card{width:min(430px,100%);background:#141f2d;border:1px solid #34465d;border-radius:24px;padding:30px;box-shadow:var(--shadow)}.auth-logo{display:flex;align-items:center;gap:11px;margin-bottom:25px}.auth-card h1{font:700 27px 'Space Grotesk';letter-spacing:-1px;margin:0 0 7px}.auth-card p{font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 20px}.auth-card label{display:block;font-size:11px;color:#aab8c8;margin:13px 0 6px}.auth-card input{width:100%;height:44px;border:1px solid var(--line);background:#0c1622;border-radius:11px;color:var(--text);padding:0 12px;outline:0}.auth-card .primary{width:100%;margin-top:18px}.auth-foot{font-size:12px;color:var(--muted);text-align:center;margin-top:17px}.link-button{color:var(--accent);border:0;background:none;font-weight:700}.notice{font-size:12px;padding:11px 12px;border-radius:10px;background:#182e34;color:#9ff1dd;margin-top:13px;display:none;line-height:1.5}.notice.error{background:#38232d;color:#ffb4bd}.toast{position:fixed;bottom:22px;right:22px;padding:12px 16px;border:1px solid #3b5966;border-radius:12px;background:#172b37;color:#dbfff7;font-size:12px;box-shadow:var(--shadow);display:none;z-index:50;max-width:min(380px,calc(100vw - 40px))}.toast.show{display:block}.mobile-only{display:none}
+    @media(max-width:760px){.shell{padding:0}.app{height:100vh;min-height:0;border-radius:0;border:0;grid-template-columns:90px minmax(0,1fr)}.brandrow{justify-content:center;padding:18px 8px}.brandcopy,.side-actions,.section-title,.chat-meta,.sidebar-bottom .me-meta,.sidebar-bottom .icon-button{display:none}.sidebar{align-items:stretch}.chat-list{padding:0 7px}.chat-item{justify-content:center;padding:8px 4px}.chat-item .avatar{width:48px;height:48px;flex-basis:48px}.sidebar-bottom{justify-content:center;padding:12px}.sidebar-bottom .avatar{width:43px;height:43px}.main{min-width:0}.chat-header{padding:0 13px;height:70px}.messages{padding:16px 12px}.message-row{max-width:90%}.composer-wrap{padding:10px}.welcome h1{font-size:25px}.mobile-only{display:block}.hint{display:none}}
+    @media(max-width:430px){.app{grid-template-columns:70px minmax(0,1fr)}.logo{height:35px;width:35px}.chat-item .avatar{width:42px;height:42px;flex-basis:42px}.messages{gap:10px}.bubble{font-size:12px}.chat-title{font-size:13px}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brandrow"><div class="logo">r.</div><div class="brandcopy"><div class="brand">relay<span>.</span></div><div class="subbrand">good conversations start here</div></div></div>
+        <div class="side-actions"><input id="chatSearch" class="search" placeholder="Search conversations…" autocomplete="off"></div>
+        <div class="section-title"><span>Messages</span><button id="newChatBtn" class="text-button">+ New</button></div>
+        <div id="chatList" class="chat-list"><div class="empty-list">Your conversations will appear here.</div></div>
+        <div class="sidebar-bottom"><div id="myAvatar" class="avatar me">?</div><div class="me-meta"><div id="myName" class="me-name">Your account</div><div id="myHandle" class="me-handle">Not signed in</div></div><button id="signOutBtn" class="icon-button" title="Sign out" aria-label="Sign out">↗</button></div>
+      </aside>
+      <main class="main">
+        <div id="welcome" class="welcome"><div class="welcome-inner"><div class="welcome-art">✦</div><h1>Make room for good chats.</h1><p>Pick a conversation on the left, or start a new one. Your messages sync live across devices.</p><button class="primary" id="welcomeNewBtn">Start a conversation&nbsp; →</button></div></div>
+        <section id="chatPanel" style="display:none;min-height:0;flex:1;flex-direction:column">
+          <header class="chat-header"><div id="headerAvatar" class="avatar">R</div><div><div id="headerTitle" class="chat-title">Conversation</div><div id="headerSubtitle" class="chat-status">Messages are private to this chat</div></div><div class="header-spacer"></div><button id="refreshBtn" class="icon-button" title="Refresh messages" aria-label="Refresh messages">↻</button></header>
+          <div id="messages" class="messages"></div>
+          <div class="composer-wrap"><form id="composer" class="composer"><textarea id="messageInput" rows="1" maxlength="4000" placeholder="Write a message…" aria-label="Write a message"></textarea><button class="send" type="submit" aria-label="Send message">➤</button></form><div class="hint">Enter to send · Shift + Enter for a new line</div></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div id="authBackdrop" class="auth-backdrop show"><div class="auth-card"><div class="auth-logo"><div class="logo">r.</div><div><div class="brand">relay<span>.</span></div><div class="subbrand">your space to connect</div></div></div><h1 id="authTitle">Welcome back.</h1><p id="authDescription">Sign in to pick up where your conversations left off.</p><form id="authForm"><div id="nameFields" style="display:none"><label for="displayName">Display name</label><input id="displayName" maxlength="40" placeholder="What should people call you?" autocomplete="name"><label for="username">Username</label><input id="username" maxlength="24" placeholder="e.g. alex_01" autocomplete="username"></div><label for="email">Email address</label><input id="email" type="email" required autocomplete="email" placeholder="you@example.com"><label for="password">Password</label><input id="password" type="password" required minlength="6" autocomplete="current-password" placeholder="At least 6 characters"><button id="authSubmit" class="primary" type="submit">Sign in</button></form><div id="authNotice" class="notice"></div><div class="auth-foot"><span id="authSwitchText">New to Relay?</span> <button id="authSwitch" class="link-button">Create an account</button></div><div class="muted" style="margin-top:20px;text-align:center;font-size:10px">Messages are protected by account-based database permissions.</div></div></div>
+
+  <div id="newChatModal" class="modal-backdrop"><div class="modal"><h2>Start a conversation</h2><div class="muted">Find someone by name or username, or create a group chat.</div><input id="peopleSearch" placeholder="Search people…" autocomplete="off"><div id="peopleList" class="person-list"><div class="empty-list">Loading people…</div></div><div style="border-top:1px solid var(--line);padding-top:14px;margin-top:7px"><div style="font-weight:700;font-size:12px">Create a group</div><input id="groupName" maxlength="80" placeholder="Group name"><div class="muted" style="margin-top:10px">Select two or more people above, then create your group.</div></div><div class="modal-actions"><button id="cancelNewChat" class="secondary">Cancel</button><button id="createGroupBtn" class="primary">Create group</button></div></div></div>
+  <div id="toast" class="toast" role="status"></div>
+
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.119.2';
+
+    // Relay connects to your Supabase project using its public publishable key.
+    const SUPABASE_URL = 'https://fvepafljhnzyeewignfk.supabase.co';
+    const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_4EX0lmXCjUPg2g5kY42pUA_qPlu8_ha';
+    const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+    const $ = (id) => document.getElementById(id);
+    let currentUser = null;
+    let profile = null;
+    let activeConversation = null;
+    let activeChannel = null;
+    let inboxChannel = null;
+    let conversations = [];
+    let directory = [];
+    let selectedPeople = new Set();
+    let authMode = 'signin';
+    let messageIds = new Set();
+    let toastTimer;
+
+    function toast(message, isError=false){const el=$('toast');el.textContent=message;el.style.borderColor=isError?'#8c4554':'#3b5966';el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),3200)}
+    function initials(value='?'){return value.trim().split(/\s+/).slice(0,2).map(x=>x[0]||'').join('').toUpperCase()||'?'}
+    function timeLabel(value){const d=new Date(value);const now=new Date();return d.toDateString()===now.toDateString()?d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}):d.toLocaleDateString([], {day:'numeric',month:'short'})}
+    function escapeText(value=''){return String(value)}
+    function setAuthNotice(message='',error=false){$('authNotice').textContent=message;$('authNotice').style.display=message?'block':'none';$('authNotice').classList.toggle('error',error)}
+    function openAuth(){ $('authBackdrop').classList.add('show'); }
+    function closeAuth(){ $('authBackdrop').classList.remove('show'); }
+    function setAuthMode(mode){authMode=mode;const signup=mode==='signup';$('authTitle').textContent=signup?'Create your space.':'Welcome back.';$('authDescription').textContent=signup?'Make an account and start connecting.':'Sign in to pick up where your conversations left off.';$('nameFields').style.display=signup?'block':'none';$('displayName').required=signup;$('username').required=signup;$('authSubmit').textContent=signup?'Create account':'Sign in';$('authSwitchText').textContent=signup?'Already have an account?':'New to Relay?';$('authSwitch').textContent=signup?'Sign in':'Create an account';$('password').autocomplete=signup?'new-password':'current-password';setAuthNotice('')}
+    $('authSwitch').addEventListener('click',()=>setAuthMode(authMode==='signin'?'signup':'signin'));
+
+    $('authForm').addEventListener('submit',async(e)=>{
+      e.preventDefault();const email=$('email').value.trim();const password=$('password').value;const button=$('authSubmit');button.disabled=true;button.textContent='Please wait…';setAuthNotice('');
+      try{
+        if(authMode==='signup'){
+          const username=$('username').value.trim().toLowerCase().replace(/[^a-z0-9_]/g,'').slice(0,24);
+          if(username.length<3)throw new Error('Choose a username with at least 3 letters or numbers.');
+          const {data,error}=await supabase.auth.signUp({email,password,options:{data:{username,display_name:$('displayName').value.trim()||username},emailRedirectTo:window.location.origin}});if(error)throw error;
+          if(!data.session){setAuthNotice('Account created. Check your email for the confirmation link, then return here and sign in.');return;}
+          toast('Your Relay account is ready.');
+        }else{
+          const {error}=await supabase.auth.signInWithPassword({email,password});if(error)throw error;
+        }
+      }catch(err){setAuthNotice(err.message||'Something went wrong. Please try again.',true)}finally{button.disabled=false;button.textContent=authMode==='signup'?'Create account':'Sign in'}
+    });
+
+    $('signOutBtn').addEventListener('click',async()=>{await supabase.auth.signOut();currentUser=null;profile=null;activeConversation=null;conversations=[];if(activeChannel)await supabase.removeChannel(activeChannel);if(inboxChannel)await supabase.removeChannel(inboxChannel);$('chatList').innerHTML='<div class="empty-list">Your conversations will appear here.</div>';$('myName').textContent='Your account';$('myHandle').textContent='Not signed in';$('myAvatar').textContent='?';$('chatPanel').style.display='none';$('welcome').style.display='grid';openAuth()});
+
+    async function boot(){
+      const {data:{session}}=await supabase.auth.getSession();
+      if(session?.user){currentUser=session.user;await enterApp()}else openAuth();
+    }
+    supabase.auth.onAuthStateChange((event,session)=>{
+      if(event==='SIGNED_IN'&&session?.user){currentUser=session.user;setTimeout(()=>enterApp(),0)}
+      if(event==='SIGNED_OUT'){currentUser=null}
+    });
+
+    async function enterApp(){
+      if(!currentUser)return;closeAuth();
+      const {data,error}=await supabase.from('relay_profiles').select('id,username,display_name,avatar_url').eq('id',currentUser.id).single();
+      if(error){toast('Could not load your profile: '+error.message,true);return;}profile=data;
+      $('myName').textContent=profile.display_name||profile.username;$('myHandle').textContent='@'+profile.username;$('myAvatar').textContent=initials(profile.display_name||profile.username);
+      await Promise.all([loadConversations(),loadDirectory()]);
+      await subscribeInbox();
+    }
+
+    async function subscribeInbox(){
+      if(inboxChannel)await supabase.removeChannel(inboxChannel);
+      inboxChannel=supabase.channel('relay-inbox:'+currentUser.id).on('postgres_changes',{event:'INSERT',schema:'public',table:'relay_messages'},payload=>{
+        if(activeConversation?.id===payload.new.conversation_id){renderMessage(payload.new);scrollMessages();}
+        loadConversations();
+      }).subscribe();
+    }
+
+    async function loadDirectory(){
+      const {data,error}=await supabase.from('relay_profiles').select('id,username,display_name,avatar_url').neq('id',currentUser.id).order('username').limit(100);
+      if(error){console.warn(error);return;}directory=data||[];renderPeople();
+    }
+
+    async function loadConversations(){
+      const {data:members,error:memberError}=await supabase.from('relay_conversation_members').select('conversation_id,last_read_at').eq('user_id',currentUser.id);
+      if(memberError){toast('Could not load chats: '+memberError.message,true);return;}
+      const ids=(members||[]).map(x=>x.conversation_id);if(!ids.length){conversations=[];renderConversationList();showWelcome();return;}
+      const [{data:rooms,error:roomError},{data:allMembers,error:allMembersError},{data:recent,error:messageError}]=await Promise.all([
+        supabase.from('relay_conversations').select('id,name,is_group,created_by,created_at,updated_at').in('id',ids).order('updated_at',{ascending:false}),
+        supabase.from('relay_conversation_members').select('conversation_id,user_id,last_read_at').in('conversation_id',ids),
+        supabase.from('relay_messages').select('id,conversation_id,sender_id,body,created_at').in('conversation_id',ids).order('created_at',{ascending:false}).limit(300)
+      ]);
+      if(roomError||allMembersError||messageError){toast((roomError||allMembersError||messageError).message,true);return;}
+      const userIds=[...new Set((allMembers||[]).map(x=>x.user_id))];const {data:people}=await supabase.from('relay_profiles').select('id,username,display_name,avatar_url').in('id',userIds);
+      const profileMap=new Map((people||[]).map(p=>[p.id,p]));const latest=new Map();for(const m of recent||[])if(!latest.has(m.conversation_id))latest.set(m.conversation_id,m);
+      const readMap=new Map((members||[]).map(m=>[m.conversation_id,m.last_read_at]));
+      conversations=(rooms||[]).map(room=>({ ...room,members:(allMembers||[]).filter(m=>m.conversation_id===room.id).map(m=>({...m,profile:profileMap.get(m.user_id)})),lastMessage:latest.get(room.id)||null,lastReadAt:readMap.get(room.id)}));
+      renderConversationList();
+      if(activeConversation){const still=conversations.find(c=>c.id===activeConversation.id);if(still){activeConversation=still;}else{showWelcome()}}
+    }
+
+    function roomName(room){if(room.is_group)return room.name||'Group chat';const other=room.members.find(m=>m.user_id!==currentUser.id)?.profile;return other?.display_name||other?.username||'Conversation'}
+    function roomPerson(room){if(room.is_group)return `${room.members.length} members`;const other=room.members.find(m=>m.user_id!==currentUser.id)?.profile;return other?'@'+other.username:'Private conversation'}
+    function renderConversationList(){
+      const filter=$('chatSearch').value.trim().toLowerCase();const list=$('chatList');list.innerHTML='';const filtered=conversations.filter(c=>(roomName(c)+' '+roomPerson(c)+' '+(c.lastMessage?.body||'')).toLowerCase().includes(filter));
+      if(!filtered.length){list.innerHTML='<div class="empty-list">'+(conversations.length?'No chats match that search.':'No conversations yet. Start a chat with the + New button.')+'</div>';return;}
+      for(const room of filtered){const el=document.createElement('div');el.className='chat-item'+(activeConversation?.id===room.id?' active':'');const unread=room.lastMessage&&room.lastMessage.sender_id!==currentUser.id&&(!room.lastReadAt||new Date(room.lastMessage.created_at)>new Date(room.lastReadAt));const avatar=initials(roomName(room));el.innerHTML=`<div class="avatar">${avatar}</div><div class="chat-meta"><div class="chat-top"><div class="chat-name"></div><div class="chat-time"></div></div><div class="chat-top"><div class="chat-preview"></div>${unread?'<span class="unread"></span>':''}</div></div>`;el.querySelector('.chat-name').textContent=roomName(room);el.querySelector('.chat-time').textContent=room.lastMessage?timeLabel(room.lastMessage.created_at):timeLabel(room.created_at);el.querySelector('.chat-preview').textContent=room.lastMessage?(room.lastMessage.sender_id===currentUser.id?'You: ':'')+room.lastMessage.body:'Start the conversation';el.addEventListener('click',()=>openConversation(room.id));list.appendChild(el);}
+    }
+    $('chatSearch').addEventListener('input',renderConversationList);
+    function showWelcome(){$('chatPanel').style.display='none';$('welcome').style.display='grid';activeConversation=null;renderConversationList()}
+
+    async function openConversation(id){
+      const room=conversations.find(c=>c.id===id);if(!room)return;activeConversation=room;$('welcome').style.display='none';$('chatPanel').style.display='flex';$('headerTitle').textContent=roomName(room);$('headerSubtitle').textContent=roomPerson(room)+' · Messages are private to members';$('headerAvatar').textContent=initials(roomName(room));$('messages').innerHTML='<div class="empty-list">Loading messages…</div>';renderConversationList();
+      const {data,error}=await supabase.from('relay_messages').select('id,conversation_id,sender_id,body,created_at').eq('conversation_id',id).order('created_at',{ascending:true}).limit(500);
+      if(error){toast('Could not load messages: '+error.message,true);return;}messageIds=new Set();$('messages').innerHTML='';(data||[]).forEach(renderMessage);scrollMessages();
+      await supabase.from('relay_conversation_members').update({last_read_at:new Date().toISOString()}).eq('conversation_id',id).eq('user_id',currentUser.id);
+      const myMembership=room.members.find(m=>m.user_id===currentUser.id);if(myMembership)myMembership.last_read_at=new Date().toISOString();room.lastReadAt=new Date().toISOString();renderConversationList();
+      if(activeChannel)await supabase.removeChannel(activeChannel);
+      activeChannel=supabase.channel('messages:'+id).on('postgres_changes',{event:'INSERT',schema:'public',table:'messages',filter:'conversation_id=eq.'+id},payload=>{
+        if(activeConversation?.id!==id)return;renderMessage(payload.new);scrollMessages();loadConversations();
+      }).subscribe();
+    }
+
+    function renderMessage(message){if(!message||messageIds.has(message.id))return;messageIds.add(message.id);const mine=message.sender_id===currentUser.id;const sender=activeConversation?.members.find(m=>m.user_id===message.sender_id)?.profile;const row=document.createElement('div');row.className='message-row'+(mine?' mine':'');const bubbleWrap=document.createElement('div');bubbleWrap.className='bubble-wrap';if(!mine){const label=document.createElement('div');label.className='sender';label.textContent=sender?.display_name||sender?.username||'Member';bubbleWrap.appendChild(label)}const bubble=document.createElement('div');bubble.className='bubble';bubble.textContent=message.body;const time=document.createElement('div');time.className='message-time';time.textContent=timeLabel(message.created_at);bubbleWrap.append(bubble,time);row.appendChild(bubbleWrap);$('messages').appendChild(row)}
+    function scrollMessages(){$('messages').scrollTop=$('messages').scrollHeight}
+    $('refreshBtn').addEventListener('click',()=>activeConversation&&openConversation(activeConversation.id));
+
+    $('composer').addEventListener('submit',async(e)=>{e.preventDefault();const body=$('messageInput').value.trim();if(!body||!activeConversation)return;const input=$('messageInput');const send=$('composer').querySelector('button');input.disabled=true;send.disabled=true;
+      const {error}=await supabase.from('relay_messages').insert({conversation_id:activeConversation.id,sender_id:currentUser.id,body});input.disabled=false;send.disabled=false;if(error){toast('Message not sent: '+error.message,true);return;}input.value='';input.style.height='auto';input.focus();
+      // The Realtime insert event adds the message to this open chat.
+    });
+    $('messageInput').addEventListener('input',()=>{const el=$('messageInput');el.style.height='auto';el.style.height=Math.min(el.scrollHeight,130)+'px'});
+    $('messageInput').addEventListener('keydown',(e)=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('composer').requestSubmit()}});
+
+    function openNewChat(){selectedPeople.clear();$('groupName').value='';$('peopleSearch').value='';renderPeople();$('newChatModal').classList.add('show')}
+    function closeNewChat(){$('newChatModal').classList.remove('show')}
+    $('newChatBtn').addEventListener('click',openNewChat);$('welcomeNewBtn').addEventListener('click',openNewChat);$('cancelNewChat').addEventListener('click',closeNewChat);$('newChatModal').addEventListener('click',e=>{if(e.target===$('newChatModal'))closeNewChat()});$('peopleSearch').addEventListener('input',renderPeople);
+    function renderPeople(){const container=$('peopleList');if(!container)return;container.innerHTML='';const term=$('peopleSearch').value.trim().toLowerCase();const matches=directory.filter(p=>(p.username+' '+(p.display_name||'')).toLowerCase().includes(term));if(!matches.length){container.innerHTML='<div class="empty-list">No people found. New members appear after they create an account.</div>';return;}
+      for(const p of matches){const row=document.createElement('div');row.className='person';const avatar=document.createElement('div');avatar.className='avatar small';avatar.textContent=initials(p.display_name||p.username);const label=document.createElement('label');label.textContent=p.display_name||p.username;const small=document.createElement('small');small.textContent='@'+p.username;label.appendChild(small);const check=document.createElement('input');check.type='checkbox';check.checked=selectedPeople.has(p.id);check.addEventListener('click',e=>e.stopPropagation());check.addEventListener('change',()=>{if(check.checked)selectedPeople.add(p.id);else selectedPeople.delete(p.id)});row.addEventListener('click',e=>{if(e.target!==check){check.checked=!check.checked;check.dispatchEvent(new Event('change'))}});row.append(avatar,label,check);container.appendChild(row);}
+    }
+    $('createGroupBtn').addEventListener('click',async()=>{const name=$('groupName').value.trim();if(!name){toast('Give your group a name first.',true);return;}if(selectedPeople.size<2){toast('Select at least two people for a group.',true);return;}const button=$('createGroupBtn');button.disabled=true;
+      try{const {data:room,error}=await supabase.from('relay_conversations').insert({name,is_group:true,created_by:currentUser.id}).select('id').single();if(error)throw error;const memberRows=[currentUser.id,...selectedPeople].map(user_id=>({conversation_id:room.id,user_id}));const {error:membersError}=await supabase.from('relay_conversation_members').insert(memberRows);if(membersError)throw membersError;closeNewChat();await loadConversations();await openConversation(room.id);toast('Group created.');}catch(err){toast(err.message||'Could not create group.',true)}finally{button.disabled=false}
+    });
+
+    async function startDirectChat(otherId){
+      // Reuse an existing one-to-one room where both people are members.
+      const [{data:mine,error:e1},{data:theirs,error:e2}]=await Promise.all([
+        supabase.from('relay_conversation_members').select('conversation_id').eq('user_id',currentUser.id),
+        supabase.from('relay_conversation_members').select('conversation_id').eq('user_id',otherId)
+      ]);if(e1||e2)throw(e1||e2);const mineSet=new Set((mine||[]).map(x=>x.conversation_id));const common=[...new Set((theirs||[]).map(x=>x.conversation_id).filter(id=>mineSet.has(id)))];
+      if(common.length){const {data:existing}=await supabase.from('relay_conversations').select('id').in('id',common).eq('is_group',false).limit(1).maybeSingle();if(existing){closeNewChat();await loadConversations();await openConversation(existing.id);return;}}
+      const {data:room,error}=await supabase.from('relay_conversations').insert({created_by:currentUser.id,is_group:false}).select('id').single();if(error)throw error;
+      const {error:memberError}=await supabase.from('relay_conversation_members').insert([{conversation_id:room.id,user_id:currentUser.id},{conversation_id:room.id,user_id:otherId}]);if(memberError)throw memberError;closeNewChat();await loadConversations();await openConversation(room.id);
+    }
+    // A single click on a person starts a direct chat; the checkbox is used for group selection.
+    $('peopleList').addEventListener('click',async(e)=>{const row=e.target.closest('.person');if(!row||e.target.tagName==='INPUT')return;const index=[...$('peopleList').children].indexOf(row);const p=directory.filter(x=>(x.username+' '+(x.display_name||'')).toLowerCase().includes($('peopleSearch').value.trim().toLowerCase()))[index];if(!p)return;try{await startDirectChat(p.id)}catch(err){toast(err.message||'Could not start chat.',true)}});
+
+    boot();
+  </script>
+</body>
+</html>
